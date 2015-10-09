@@ -25,7 +25,7 @@ creates:
       dateSubmitted: '{generated date}'
     }
 
-usage example: 
+usage example:
 
     var ne = newEvent('widgets', 'create', { name: 'my widget'})
     ee.on(ne.from, handleEvent)
@@ -44,7 +44,7 @@ The response event takes a existing event and prepares a response event based no
       dateSubmitted: '{generated date}'
     }
 
-then 
+then
 
     var response = require('palmettoflow-event').response
     var re = response(event, { ok: true })
@@ -86,6 +86,7 @@ Next, lets create a `widgets.js` file and add the following:
         widgets.push(e.object)
         ee.emit('send', response(e, { ok: true }))
       })
+    }
 
 Now verify you service by running:
 
