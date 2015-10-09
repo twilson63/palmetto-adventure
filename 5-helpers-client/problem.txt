@@ -1,0 +1,48 @@
+# New Event Palmetto Flow Helper
+
+Creating new events using palmetto flow helpers.
+
+This exercise is an extension of the previous, instead of
+building the service, we are going to build a client and
+the adventure will take care of the service for us:
+
+We want to get a list of widgets, from the `widgets/list` service.
+
+First, we want to install `palmettoflow-event` and `palmettoflow-nodejs`
+
+    npm install palmettoflow-event
+    npm install palmettoflow-nodejs
+
+Next, we want to create our `client.js` file:
+
+    var palmetto = require('palmettoflow-nodejs')
+    var newEvent = require('palmettoflow-event').newEvent
+
+    var ee = palmetto()
+
+    var ne = newEvent('widgets', 'list', {})
+
+    var to = setTimeout(function () {
+      console.log('Service did not respond')
+    }, 500)
+
+    ee.once(ne.from, function (e) {
+      clearTimeout(to)
+      console.log(e.object)
+    })
+
+    ee.emit('send', ne)
+
+So, what we are requesting a list of widgets and logging the widgets out to the console.
+
+Once finished with building your event emitter run
+
+    palmetto-adventure run main.js
+
+And when you are ready to complete this exercise run
+
+    palmetto-adventure verify main.js
+
+Lastly, to move to the next exercise run
+
+    palmetto-adventure

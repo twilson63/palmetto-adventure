@@ -88,12 +88,15 @@ Next, lets create a `widgets.js` file and add the following:
       })
     }
 
-Now verify you service by running:
+Once finished with building your event emitter run
 
-    palmetto-adventure verify widget.js
+    palmetto-adventure run main.js
 
+And when you are ready to complete this exercise run
 
-    }
+    palmetto-adventure verify main.js
 
+Lastly, to move to the next exercise run
 
+    palmetto-adventure
 

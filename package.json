@@ -28,5 +28,8 @@
     "url": "https://github.com/twilson63/palmetto-adventure/issues"
   },
   "homepage": "https://github.com/twilson63/palmetto-adventure#readme",
-  "description": ""
+  "description": "",
+  "engines": {
+    "node": "^4.x"
+  }
 }

@@ -1,7 +1,5 @@
 var fs = require('fs')
 var verify = require('adventure-verify')
-var spawn = require('child_process').spawn
-var concat = require('concat-stream')
 var path = require('path')
 
 exports.problem = fs.readFileSync(__dirname + '/problem.txt', 'utf-8')
