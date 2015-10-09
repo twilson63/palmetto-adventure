@@ -1,0 +1,98 @@
+# Palmetto Flow Helpers
+
+Generating events and responses can become pretty tedious, using `palmettoflow-event` module and following a basic standard you can take advantage of some helper functions to make the event messaging management very easy:
+
+Palmettoflow-event contains three methods:
+
+- newEvent
+- response
+- responseError
+
+## newEvent (subject, verb, object, [actor])
+
+With newEvent you can pass in a subject, verb, payload, and optional actor.
+
+    var ne = newEvent('widgets', 'create', { name: 'my widget'})
+
+creates:
+
+    {
+      to: '/widgets/create',
+      from: '{generated unique id}',
+      subject: 'widgets',
+      verb: 'create',
+      object: { name: 'my widget' }
+      dateSubmitted: '{generated date}'
+    }
+
+usage example: 
+
+    var ne = newEvent('widgets', 'create', { name: 'my widget'})
+    ee.on(ne.from, handleEvent)
+    ee.emit('send', ne)
+
+## response (event, object)
+
+The response event takes a existing event and prepares a response event based no the event being passed in, for example, if the event was like this:
+
+    var event = {
+      to: '/widgets/create',
+      from: '{generated unique id}',
+      subject: 'widgets',
+      verb: 'create',
+      object: { name: 'my widget' }
+      dateSubmitted: '{generated date}'
+    }
+
+then 
+
+    var response = require('palmettoflow-event').response
+    var re = response(event, { ok: true })
+
+would create a response event that looked like this:
+
+    var event = {
+      from: '/widgets/create',
+      to: '{generated unique id}',
+      subject: 'widgets-response',
+      verb: 'create-response',
+      object: { ok: true }
+      dateSubmitted: '{generated date}',
+      duration: 100
+    }
+
+It basically swaps the to and from and calcuates the duration as well as append the reponse text to the subject and verb.
+
+## responseError (event, object)
+
+Does the same thing as response, but appends the subject and verb with error instead of response.
+
+In this exercise, lets create a widgets service that creates a widget by storing it in an array and returns ok true as response using the response method from `palmettoflow-event`
+
+When we build services, we want them to be as flexable as possible, so we want to pass in the `ee` object to the module, this will enable the object to be any kind of adapter:
+
+First, we want to install the `palmettoflow-event` module
+
+    npm install palmettoflow-event
+
+Next, lets create a `widgets.js` file and add the following:
+
+    var response = require('palmettoflow-event').response
+
+    var widgets = []
+
+    module.exports = function (ee) {
+      ee.on('/widgets/create', function (e) {
+        widgets.push(e.object)
+        ee.emit('send', response(e, { ok: true }))
+      })
+
+Now verify you service by running:
+
+    palmetto-adventure verify widget.js
+
+
+    }
+
+
+

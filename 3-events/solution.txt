@@ -1,0 +1,32 @@
+service.js
+
+    var palmetto = require('palmettoflow-nodejs')
+    var ee = palmetto()
+
+    ee.on('/echo', function (e) {
+      ee.emit('send', {
+        to: e.from,
+        from: e.to,
+        subject: 'echo',
+        verb: 'run',
+        object: e.object
+      })
+    })
+
+    module.exports = ee
+
+client.js
+
+    var ee = require('./service')
+
+    ee.on('1234', function (e) {
+      console.log(e.object)
+    })
+
+    ee.emit('send', {
+      to: '/echo',
+      from: '1234',
+      subject: 'echo',
+      verb: 'run',
+      object: 'ECHO ME'
+    })

@@ -1,0 +1,45 @@
+# 2- palmettoflow-nodejs adapter
+
+PalmettoFlow uses pub/sub as the core bridge between services and components, in order to make it easy to 
+replace pub/sub bridges, palmetto flow has `adapters`
+these adapters abstract the specific pub/sub bridge away from the developer, so the developer may code as if they
+are connecting to an `EventEmitter`.
+
+In this exercise, we want to use the palmettoflow-nodejs adapter to send a palmetto flow event from the client to the service. 
+
+Don't worry about understanding a palmettoflow `event` right now.
+
+First, we need to install the `palmettoflow-nodejs` adapter
+
+    npm install palmettoflow-nodejs
+
+Next, create a file called `2.js` or your preference and require the `palmettoflow-nodejs` module:
+
+    var palmetto = require('palmettoflow-nodejs')
+    var ee = palmetto()
+
+Next, create a listener for a particular service/verb:
+
+    ee.on('/widgets/list', function (e) {
+      console.log('WIDGETS')
+    })
+
+Finally, we will send and event message to this service:
+
+    ee.emit('send', {
+      to: '/widgets/list',
+      from: '1234',
+      object: {}
+    })
+
+Once finished with building your event emitter run 
+
+    palmetto-adventure run main.js
+
+And when you are ready to complete this exercise run
+
+    palmetto-adventure verify main.js
+
+Lastly, to move to the next exercise run
+
+    palmetto-adventure

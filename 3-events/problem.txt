@@ -1,0 +1,64 @@
+# Palmetto Flow Events
+
+Palmetto Flow Events use a specific message that contain
+certain attributes that enable services and components to share a common generic contract:
+
+The event message looks like this:
+
+    {
+      to: 'receiver unique address',
+      from: 'sender unique address',
+      subject: 'service name',
+      verb: 'action',
+      object: 'your request or response payload',
+      actor: 'entity sending the request',
+      dateSubmitted: 'date request is sent',
+      duration: 'ms service took to run'
+    }
+
+In this exercise, we will create an echo service, this service will simply return back any message received:
+
+First, create a file called `service.js` or your preference and create your service:
+
+    var palmetto = require('palmettoflow-event')
+    var ee = palmetto()
+
+    ee.on('/echo', function (e) {
+      ee.emit('send', {
+        to: e.from,
+        from: e.to,
+        subject: e.subject,
+        verb: e.verb,
+        object: e.object
+      })
+    })
+
+    module.exports = ee
+
+Next, lets create a `client.js` to call the echo service:
+
+    var ee = require('./service')
+
+    ee.on('1234', function (e) {
+      console.log(e.object)
+    })
+
+    ee.emit('send', {
+      to: '/echo',
+      from: '1234',
+      subject: 'ECHO',
+      verb: 'RUN',
+      object: 'ECHO ME'
+    })
+
+Once finished with building your event emitter run 
+
+    palmetto-adventure run main.js
+
+And when you are ready to complete this exercise run
+
+    palmetto-adventure verify main.js
+
+Lastly, to move to the next exercise run
+
+    palmetto-adventure
