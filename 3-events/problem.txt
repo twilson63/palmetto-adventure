@@ -1,6 +1,6 @@
-# Palmetto Flow Events
+# PalmettoFlow Events
 
-Palmetto Flow Events use a specific message that contain
+PalmettoFlow Events use a specific message that contains
 certain attributes that enable services and components to share a common generic contract:
 
 The event message looks like this:

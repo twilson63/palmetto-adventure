@@ -1,6 +1,6 @@
-# New Event Palmetto Flow Helper
+# New Event PalmettoFlow Helper
 
-Creating new events using palmetto flow helpers.
+Creating new events using PalmettoFlow Helpers.
 
 This exercise is an extension of the previous, instead of
 building the service, we are going to build a client and
@@ -33,7 +33,7 @@ Next, we want to create our `client.js` file:
 
     ee.emit('send', ne)
 
-So, what we are requesting a list of widgets and logging the widgets out to the console.
+So, we are requesting a list of widgets and logging the widgets out to the console.
 
 Once finished with building your event emitter run
 

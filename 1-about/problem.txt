@@ -1,14 +1,14 @@
-# Palmetto Flow
+# PalmettoFlow
 
 Is an adaptable distributed application concept, which means that it uses publish/subscribe as a bridge between components and services, in a way that any part of the system can be replaced.
 
-Core abstraction of palmetto flow is that of the event emitter. The event emitter has three core methods:
+Core abstraction of PalmettoFlow is that of the event emitter. The event emitter has three core methods:
 
 * emit - which publishes an object to a message type
 * on - which subscribes to a message type
 * once - which subscribes to a message type one time
 
-By leveraging this simple api we can build loosely coupled services and connect thoses services to our front end components in an adaptable way.
+By leveraging this simple api we can build loosely coupled services and connect those services to our front end components in an adaptable way.
 
 In this exercise, lets build a basic event emitter:
 

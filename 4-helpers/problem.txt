@@ -1,6 +1,6 @@
-# Palmetto Flow Helpers
+# PalmettoFlow Helpers
 
-Generating events and responses can become pretty tedious, using `palmettoflow-event` module and following a basic standard you can take advantage of some helper functions to make the event messaging management very easy:
+Generating events and responses can become pretty tedious, using the `palmettoflow-event` module and following a basic standard you can take advantage of some helper functions to make event messaging management very easy:
 
 Palmettoflow-event contains three methods:
 
@@ -33,7 +33,7 @@ usage example:
 
 ## response (event, object)
 
-The response event takes a existing event and prepares a response event based no the event being passed in, for example, if the event was like this:
+The response event takes an existing event and prepares a response event based on the event being passed in, for example, if the event was like this:
 
     var event = {
       to: '/widgets/create',
@@ -61,13 +61,13 @@ would create a response event that looked like this:
       duration: 100
     }
 
-It basically swaps the to and from and calcuates the duration as well as append the reponse text to the subject and verb.
+It basically swaps the to and from and calcuates the duration as well as appends the reponse text to the subject and verb.
 
 ## responseError (event, object)
 
 Does the same thing as response, but appends the subject and verb with error instead of response.
 
-In this exercise, lets create a widgets service that creates a widget by storing it in an array and returns ok true as response using the response method from `palmettoflow-event`
+In this exercise, lets create a widgets service that creates a widget by storing it in an array and returns ok true as the response using the response method from `palmettoflow-event`
 
 When we build services, we want them to be as flexable as possible, so we want to pass in the `ee` object to the module, this will enable the object to be any kind of adapter:
 
